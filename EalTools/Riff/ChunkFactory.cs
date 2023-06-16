@@ -20,7 +20,8 @@ public static class ChunkFactory
         {
             FourCC.Riff => new RiffChunk(),
             FourCC.List => new ListChunk(),
-            FourCC.Majv => new MajChunk(),
+            FourCC.Majv => new MajvChunk(),
+            FourCC.Minv => new MinvChunk(),
             _ => new UnknownChunk(),
         };
     }

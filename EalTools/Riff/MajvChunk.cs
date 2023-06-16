@@ -1,10 +1,10 @@
 namespace EalTools.Riff;
 
-public class MajChunk : Chunk
+public class MajvChunk : Chunk
 {
     public int MajorVersion { get; set; }
 
-    public MajChunk()
+    public MajvChunk()
     {
         ChunkId = FourCC.Majv;
     }

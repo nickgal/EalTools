@@ -9,6 +9,10 @@ public enum FourCC : uint
     List = 1414744396u,
 
     Eal = 543973733u,
+
+    Majv = 1986683245u,
+    Minv = 1986947437u,
+
     Num = 544044398u,
     Srca = 1633907315u,
     Gema = 1634559335u,
@@ -27,7 +31,5 @@ public enum FourCC : uint
     Fils = 1936484710u,
     Nams = 1936548206u,
     Dmat = 1952542052u,
-    Majv = 1986683245u,
     Denv = 1986946404u,
-    Minv = 1986947437u,
 }
