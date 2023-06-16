@@ -16,4 +16,10 @@ public static class FixtureFileLoader
         var filePath = GetFilePath(fixtureDir, fileName);
         return File.ReadAllBytes(filePath);
     }
+
+    public static Stream LoadFileToStream(string fixtureDir, string fileName)
+    {
+        var filePath = GetFilePath(fixtureDir, fileName);
+        return File.OpenRead(filePath);
+    }
 }
