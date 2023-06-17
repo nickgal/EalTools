@@ -22,6 +22,22 @@ public static class ChunkFactory
             FourCC.List => new ListChunk(),
             FourCC.Majv => new MajvChunk(),
             FourCC.Minv => new MinvChunk(),
+            // FourCC.Exep => new ExepChunk(),
+            // FourCC.Cmds => new CmdsChunk(),
+            // FourCC.Gdfm => new GdfmChunk(),
+            // FourCC.Lisa => new LisaChunk(),
+            // FourCC.Denv => new LispChunk(),
+            FourCC.Dsrc => new DsrcChunk(),
+            FourCC.Dfil => new DfilChunk(),
+            // FourCC.Dmat => new UnknownChunk(),
+            FourCC.Num => new NumChunk(),
+            FourCC.Nams => new NamsChunk(),
+            FourCC.Fils => new FilsChunk(),
+            // FourCC.Lisp => new LispChunk(),
+            FourCC.Srca => new SrcaChunk(),
+            // FourCC.Mata => new MataChunk(),
+            // FourCC.Gema => new GemaChunk(),
+
             _ => new UnknownChunk(),
         };
     }

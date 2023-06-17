@@ -4,7 +4,7 @@ namespace EalTools;
 
 public class EalFile
 {
-    public RiffChunk? RootChunk;
+    public RiffChunk RootChunk = new();
 
     private BinaryReader _reader;
 

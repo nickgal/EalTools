@@ -21,4 +21,19 @@ public class ListChunk : Chunk
             SubChunks.Add(subChunk);
         }
     }
+
+    public IEnumerable<T> FindSubChunks<T>() where T : IChunk
+    {
+        return SubChunks?.OfType<T>() ?? Enumerable.Empty<T>();
+    }
+
+    public T FindSubChunk<T>() where T : IChunk
+    {
+        return FindSubChunks<T>().First();
+    }
+
+    public ListChunk FindListOfForm(FourCC formType)
+    {
+        return FindSubChunks<ListChunk>().Single(c => c.FormType == formType);
+    }
 }
