@@ -30,6 +30,13 @@ public class ChunkTests
     }
 
     [Test]
+    public void Parse_DmatChunk()
+    {
+        var chunk = EalFile.RootChunk.FindSubChunk<DmatChunk>();
+        Assert.That(chunk.MaterialAttributes, Is.InstanceOf<EaxMaterialAttributes>());
+    }
+
+    [Test]
     public void Parse_DsrcChunk()
     {
         var chunk = EalFile.RootChunk.FindSubChunk<DsrcChunk>();
@@ -69,6 +76,15 @@ public class ChunkTests
     {
         var chunk = EalFile.RootChunk.FindSubChunk<MajvChunk>();
         Assert.That(chunk.MajorVersion, Is.EqualTo(2));
+    }
+
+    [Test]
+    public void Parse_MataChunk()
+    {
+        var listChunk = EalFile.RootChunk.FindListOfForm(FourCC.Matp);
+        var chunk = listChunk.FindSubChunk<MataChunk>();
+
+        Assert.That(chunk.MaterialAttributes[3], Is.InstanceOf<EaxMaterialAttributes>());
     }
 
     [Test]
