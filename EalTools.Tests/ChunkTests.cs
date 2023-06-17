@@ -47,6 +47,14 @@ public class ChunkTests
     }
 
     [Test]
+    public void Parse_LisaChunk()
+    {
+        var chunk = EalFile.RootChunk.FindSubChunk<LisaChunk>();
+
+        Assert.That(chunk.ListenerAttributes, Is.InstanceOf<EaxListenerAttributes>());
+    }
+
+    [Test]
     public void Parse_LispChunk()
     {
         var listChunk = EalFile.RootChunk.FindListOfForm(FourCC.Envp);
