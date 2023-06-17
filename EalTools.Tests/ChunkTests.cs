@@ -16,6 +16,13 @@ public class ChunkTests
     }
 
     [Test]
+    public void Parse_DenvChunk()
+    {
+        var chunk = EalFile.RootChunk.FindSubChunk<DenvChunk>();
+        Assert.That(chunk.ListenerProperties, Is.InstanceOf<EaxListenerProperties>());
+    }
+
+    [Test]
     public void Parse_DfilChunk()
     {
         var chunk = EalFile.RootChunk.FindSubChunk<DfilChunk>();
@@ -38,6 +45,16 @@ public class ChunkTests
 
         Assert.IsTrue(chunk.Filepaths.SequenceEqual(expectedFilepaths));
     }
+
+    [Test]
+    public void Parse_LispChunk()
+    {
+        var listChunk = EalFile.RootChunk.FindListOfForm(FourCC.Envp);
+        var chunk = listChunk.FindSubChunk<LispChunk>();
+
+        Assert.That(chunk.ListenerProperties, Has.Count.EqualTo(3));
+    }
+
 
     [Test]
     public void Parse_MajvChunk()
