@@ -17,7 +17,7 @@ public class EaxListenerProperties
     public float ReflectionsDelay;      // initial reflection delay time
     public int Reverb;                  // late reverberation level relative to room effect
     public float ReverbDelay;           // late reverberation delay time relative to initial reflection
-    public uint Environment;            // sets all listener properties
+    public EaxEnvironment Environment;  // sets all listener properties
     public float EnvironmentSize;       // environment size in meters
     public float EnvironmentDiffusion;  // environment diffusion
     public float AirAbsorptionHF;       // change in level per meter at 5 kHz
@@ -36,7 +36,7 @@ public class EaxListenerProperties
             ReflectionsDelay = reader.ReadSingle(),
             Reverb = reader.ReadInt32(),
             ReverbDelay = reader.ReadSingle(),
-            Environment = reader.ReadUInt32(),
+            Environment = (EaxEnvironment) reader.ReadUInt32(),
             EnvironmentSize = reader.ReadSingle(),
             EnvironmentDiffusion = reader.ReadSingle(),
             AirAbsorptionHF = reader.ReadSingle(),
