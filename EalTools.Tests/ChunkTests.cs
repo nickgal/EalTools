@@ -54,6 +54,16 @@ public class ChunkTests
     }
 
     [Test]
+    public void Parse_GdfmChunk()
+    {
+        var chunk = EalFile.RootChunk.FindSubChunk<GdfmChunk>();
+
+        Assert.That(chunk.MaxAttenuation, Is.EqualTo(-6000));
+        Assert.That(chunk.LfRatio, Is.EqualTo(0.25f));
+        Assert.That(chunk.AngleMaxAttenuation, Is.EqualTo(90));
+    }
+
+    [Test]
     public void Parse_LisaChunk()
     {
         var chunk = EalFile.RootChunk.FindSubChunk<LisaChunk>();

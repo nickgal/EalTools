@@ -24,7 +24,7 @@ public static class ChunkFactory
             FourCC.Minv => new MinvChunk(),
             // FourCC.Exep => new ExepChunk(),
             // FourCC.Cmds => new CmdsChunk(),
-            // FourCC.Gdfm => new GdfmChunk(),
+            FourCC.Gdfm => new GdfmChunk(),
             FourCC.Lisa => new LisaChunk(),
             FourCC.Denv => new DenvChunk(),
             FourCC.Dsrc => new DsrcChunk(),
