@@ -2,10 +2,10 @@ namespace EalTools.Eal;
 
 public class EaxMaterialAttributes
 {
-    public int Level;
-    public float LfRatio;
-    public float RoomRatio;
-    public EaxMaterialFlags Flags;
+    public int Level { get; set; }
+    public float LfRatio { get; set; }
+    public float RoomRatio { get; set; }
+    public EaxMaterialFlags Flags { get; set; }
 
     public static EaxMaterialAttributes Parse(BinaryReader reader)
     {

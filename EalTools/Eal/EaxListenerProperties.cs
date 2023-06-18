@@ -8,20 +8,20 @@ namespace EalTools.Eal;
 /// </summary>
 public class EaxListenerProperties
 {
-    public int Room;                    // room effect level at low frequencies
-    public int RoomHF;                  // room effect high-frequency level re. low frequency level
-    public float RoomRolloffFactor;     // like DS3D flRolloffFactor but for room effect
-    public float DecayTime;             // reverberation decay time at low frequencies
-    public float DecayHFRatio;          // high-frequency to low-frequency decay time ratio
-    public int Reflections;             // early reflections level relative to room effect
-    public float ReflectionsDelay;      // initial reflection delay time
-    public int Reverb;                  // late reverberation level relative to room effect
-    public float ReverbDelay;           // late reverberation delay time relative to initial reflection
-    public EaxEnvironment Environment;  // sets all listener properties
-    public float EnvironmentSize;       // environment size in meters
-    public float EnvironmentDiffusion;  // environment diffusion
-    public float AirAbsorptionHF;       // change in level per meter at 5 kHz
-    public EaxListenerFlags Flags;      // modifies the behavior of properties
+    public int Room { get; set; }                    // room effect level at low frequencies
+    public int RoomHF { get; set; }                  // room effect high-frequency level re. low frequency level
+    public float RoomRolloffFactor { get; set; }     // like DS3D flRolloffFactor but for room effect
+    public float DecayTime { get; set; }             // reverberation decay time at low frequencies
+    public float DecayHFRatio { get; set; }          // high-frequency to low-frequency decay time ratio
+    public int Reflections { get; set; }             // early reflections level relative to room effect
+    public float ReflectionsDelay { get; set; }      // initial reflection delay time
+    public int Reverb { get; set; }                  // late reverberation level relative to room effect
+    public float ReverbDelay { get; set; }           // late reverberation delay time relative to initial reflection
+    public EaxEnvironment Environment { get; set; }  // sets all listener properties
+    public float EnvironmentSize { get; set; }       // environment size in meters
+    public float EnvironmentDiffusion { get; set; }  // environment diffusion
+    public float AirAbsorptionHF { get; set; }       // change in level per meter at 5 kHz
+    public EaxListenerFlags Flags { get; set; }      // modifies the behavior of properties
 
     public static EaxListenerProperties Parse(BinaryReader reader)
     {

@@ -2,9 +2,9 @@ namespace EalTools.Eal;
 
 public class EaxListenerAttributes
 {
-    public float DistanceFactor;
-    public float RolloffFactor;
-    public float DopplerFactor;
+    public float DistanceFactor { get; set; }
+    public float RolloffFactor { get; set; }
+    public float DopplerFactor { get; set; }
 
     public static EaxListenerAttributes Parse(BinaryReader reader)
     {
