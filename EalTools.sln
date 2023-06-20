@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EalTools", "EalTools\EalToo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EalTools.Tests", "EalTools.Tests\EalTools.Tests.csproj", "{AFF2483A-64F2-4DA2-A067-AC5FA5D75C94}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EalTools.Tui", "EalTools.Tui\EalTools.Tui.csproj", "{BA061678-2812-43FA-921B-0F0DB9B3D07F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{AFF2483A-64F2-4DA2-A067-AC5FA5D75C94}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AFF2483A-64F2-4DA2-A067-AC5FA5D75C94}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AFF2483A-64F2-4DA2-A067-AC5FA5D75C94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA061678-2812-43FA-921B-0F0DB9B3D07F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA061678-2812-43FA-921B-0F0DB9B3D07F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA061678-2812-43FA-921B-0F0DB9B3D07F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA061678-2812-43FA-921B-0F0DB9B3D07F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
