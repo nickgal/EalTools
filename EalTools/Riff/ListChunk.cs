@@ -1,3 +1,5 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace EalTools.Riff;
 
 public class ListChunk : Chunk
@@ -27,13 +29,25 @@ public class ListChunk : Chunk
         return SubChunks?.OfType<T>() ?? Enumerable.Empty<T>();
     }
 
-    public T FindSubChunk<T>() where T : IChunk
+    public T? FindSubChunk<T>() where T : IChunk
     {
-        return FindSubChunks<T>().First();
+        return FindSubChunks<T>().FirstOrDefault();
     }
 
-    public ListChunk FindListOfForm(FourCC formType)
+    public bool TryFindSubChunk<T>([NotNullWhen(returnValue: true)] out T subChunk) where T : IChunk
     {
-        return FindSubChunks<ListChunk>().Single(c => c.FormType == formType);
+        subChunk = FindSubChunk<T>()!;
+        return subChunk is not null;
+    }
+
+    public ListChunk? FindListOfForm(FourCC formType)
+    {
+        return FindSubChunks<ListChunk>().SingleOrDefault(c => c.FormType == formType);
+    }
+
+    public bool TryFindListOfForm(FourCC formType, [NotNullWhen(returnValue: true)] out ListChunk listChunk)
+    {
+        listChunk = FindListOfForm(formType)!;
+        return listChunk is not null;
     }
 }

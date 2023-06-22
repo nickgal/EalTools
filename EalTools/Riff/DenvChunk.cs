@@ -1,7 +1,9 @@
 using EalTools.Eal;
 
 namespace EalTools.Riff;
-
+/// <summary>
+/// DefaultEnvironment
+/// </summary>
 public class DenvChunk : Chunk
 {
     public EaxListenerProperties ListenerProperties { get; set; }

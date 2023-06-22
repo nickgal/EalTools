@@ -1,12 +1,14 @@
+using EalTools.Eal;
 using EalTools.Riff;
 
 namespace EalTools;
 
 public class EalFile
 {
+    public EalData? Data { get; set; }
     public RiffChunk RootChunk = new();
 
-    private BinaryReader _reader;
+    private readonly BinaryReader _reader;
 
     public EalFile(string filePath)
     {
@@ -28,6 +30,7 @@ public class EalFile
         }
 
         RootChunk = riffChunk;
+        Data = new EalData(riffChunk);
 
         return true;
     }

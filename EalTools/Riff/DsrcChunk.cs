@@ -1,7 +1,9 @@
 using EalTools.Eal;
 
 namespace EalTools.Riff;
-
+/// <summary>
+/// Default Source
+/// </summary>
 public class DsrcChunk : Chunk
 {
     public EaxSourceAttributes SourceAttributes { get; set; }

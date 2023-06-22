@@ -1,7 +1,9 @@
 using EalTools.Eal;
 
 namespace EalTools.Riff;
-
+/// <summary>
+/// Default Obstacle
+/// </summary>
 public class DmatChunk : Chunk
 {
     public EaxMaterialAttributes MaterialAttributes { get; set; }

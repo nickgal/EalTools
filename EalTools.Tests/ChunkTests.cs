@@ -16,31 +16,45 @@ public class ChunkTests
     }
 
     [Test]
+    public void Parse_CmdsChunk()
+    {
+        // TODO:
+        Assert.Fail();
+    }
+
+    [Test]
     public void Parse_DenvChunk()
     {
         var chunk = EalFile.RootChunk.FindSubChunk<DenvChunk>();
-        Assert.That(chunk.ListenerProperties, Is.InstanceOf<EaxListenerProperties>());
+        Assert.That(chunk?.ListenerProperties, Is.InstanceOf<EaxListenerProperties>());
     }
 
     [Test]
     public void Parse_DfilChunk()
     {
         var chunk = EalFile.RootChunk.FindSubChunk<DfilChunk>();
-        Assert.That(chunk.Filepath, Is.EqualTo(string.Empty));
+        Assert.That(chunk?.Filepath, Is.EqualTo(string.Empty));
     }
 
     [Test]
     public void Parse_DmatChunk()
     {
         var chunk = EalFile.RootChunk.FindSubChunk<DmatChunk>();
-        Assert.That(chunk.MaterialAttributes, Is.InstanceOf<EaxMaterialAttributes>());
+        Assert.That(chunk?.MaterialAttributes, Is.InstanceOf<EaxMaterialAttributes>());
     }
 
     [Test]
     public void Parse_DsrcChunk()
     {
         var chunk = EalFile.RootChunk.FindSubChunk<DsrcChunk>();
-        Assert.That(chunk.SourceAttributes, Is.InstanceOf<EaxSourceAttributes>());
+        Assert.That(chunk?.SourceAttributes, Is.InstanceOf<EaxSourceAttributes>());
+    }
+
+    [Test]
+    public void Parse_ExepChunk()
+    {
+        // TODO:
+        Assert.Fail();
     }
 
     [Test]
@@ -48,19 +62,26 @@ public class ChunkTests
     {
         var expectedFilepaths = new List<string> { @"C:\Program Files\EAGLE\Drum.wav" };
         var listChunk = EalFile.RootChunk.FindListOfForm(FourCC.Srcp);
-        var chunk = listChunk.FindSubChunk<FilsChunk>();
+        var chunk = listChunk?.FindSubChunk<FilsChunk>();
 
-        Assert.IsTrue(chunk.Filepaths.SequenceEqual(expectedFilepaths));
+        Assert.IsTrue(chunk?.Filepaths?.SequenceEqual(expectedFilepaths));
     }
 
     [Test]
     public void Parse_GdfmChunk()
     {
-        var chunk = EalFile.RootChunk.FindSubChunk<GdfmChunk>();
+        var diffractionModel = EalFile.RootChunk.FindSubChunk<GdfmChunk>()?.DiffractionModel;
 
-        Assert.That(chunk.MaxAttenuation, Is.EqualTo(-6000));
-        Assert.That(chunk.LfRatio, Is.EqualTo(0.25f));
-        Assert.That(chunk.AngleMaxAttenuation, Is.EqualTo(90));
+        Assert.That(diffractionModel?.MaxAttenuation, Is.EqualTo(-6000));
+        Assert.That(diffractionModel?.LfRatio, Is.EqualTo(0.25f));
+        Assert.That(diffractionModel?.AngleMaxAttenuation, Is.EqualTo(90));
+    }
+
+    [Test]
+    public void Parse_GemaChunk()
+    {
+        // TODO:
+        Assert.Fail();
     }
 
     [Test]
@@ -68,16 +89,16 @@ public class ChunkTests
     {
         var chunk = EalFile.RootChunk.FindSubChunk<LisaChunk>();
 
-        Assert.That(chunk.ListenerAttributes, Is.InstanceOf<EaxListenerAttributes>());
+        Assert.That(chunk?.ListenerAttributes, Is.InstanceOf<EaxListenerAttributes>());
     }
 
     [Test]
     public void Parse_LispChunk()
     {
         var listChunk = EalFile.RootChunk.FindListOfForm(FourCC.Envp);
-        var chunk = listChunk.FindSubChunk<LispChunk>();
+        var chunk = listChunk?.FindSubChunk<LispChunk>();
 
-        Assert.That(chunk.ListenerProperties, Has.Count.EqualTo(3));
+        Assert.That(chunk?.ListenerProperties, Has.Count.EqualTo(3));
     }
 
 
@@ -85,23 +106,23 @@ public class ChunkTests
     public void Parse_MajvChunk()
     {
         var chunk = EalFile.RootChunk.FindSubChunk<MajvChunk>();
-        Assert.That(chunk.MajorVersion, Is.EqualTo(2));
+        Assert.That(chunk?.MajorVersion, Is.EqualTo(2));
     }
 
     [Test]
     public void Parse_MataChunk()
     {
         var listChunk = EalFile.RootChunk.FindListOfForm(FourCC.Matp);
-        var chunk = listChunk.FindSubChunk<MataChunk>();
+        var chunk = listChunk?.FindSubChunk<MataChunk>();
 
-        Assert.That(chunk.MaterialAttributes[3], Is.InstanceOf<EaxMaterialAttributes>());
+        Assert.That(chunk?.MaterialAttributes[3], Is.InstanceOf<EaxMaterialAttributes>());
     }
 
     [Test]
     public void Parse_MinvChunk()
     {
         var chunk = EalFile.RootChunk.FindSubChunk<MinvChunk>();
-        Assert.That(chunk.MinorVersion, Is.EqualTo(1));
+        Assert.That(chunk?.MinorVersion, Is.EqualTo(1));
     }
 
     [Test]
@@ -109,18 +130,18 @@ public class ChunkTests
     {
         var expectedNames = new List<string> { "Back Room", "Front Room", "Hallway" };
         var listChunk = EalFile.RootChunk.FindListOfForm(FourCC.Envp);
-        var chunk = listChunk.FindSubChunk<NamsChunk>();
+        var chunk = listChunk?.FindSubChunk<NamsChunk>();
 
-        Assert.IsTrue(chunk.Names.SequenceEqual(expectedNames));
+        Assert.IsTrue(chunk?.Names?.SequenceEqual(expectedNames));
     }
 
     [Test]
     public void Parse_NumChunk()
     {
         var listChunk = EalFile.RootChunk.FindListOfForm(FourCC.Envp);
-        var chunk = listChunk.FindSubChunk<NumChunk>();
+        var chunk = listChunk?.FindSubChunk<NumChunk>();
 
-        Assert.That(chunk.Number, Is.EqualTo(3));
+        Assert.That(chunk?.Number, Is.EqualTo(3));
     }
 
     [Test]
@@ -135,8 +156,8 @@ public class ChunkTests
     public void Parse_SrcaChunk()
     {
         var listChunk = EalFile.RootChunk.FindListOfForm(FourCC.Srcp);
-        var chunk = listChunk.FindSubChunk<SrcaChunk>();
+        var chunk = listChunk?.FindSubChunk<SrcaChunk>();
 
-        Assert.That(chunk.SourceAttributes[0], Is.InstanceOf<EaxSourceAttributes>());
+        Assert.That(chunk?.SourceAttributes[0], Is.InstanceOf<EaxSourceAttributes>());
     }
 }
