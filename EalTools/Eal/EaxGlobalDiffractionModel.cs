@@ -1,18 +1,21 @@
-namespace EalTools.Eal;
+using System.IO;
 
-public class EaxGlobalDiffractionModel
+namespace EalTools.Eal
 {
-    public int MaxAttenuation { get; set; }
-    public float LfRatio { get; set; }
-    public int AngleMaxAttenuation { get; set; }
-
-    public static EaxGlobalDiffractionModel Parse(BinaryReader reader)
+    public class EaxGlobalDiffractionModel
     {
-        return new()
+        public int MaxAttenuation { get; set; }
+        public float LfRatio { get; set; }
+        public int AngleMaxAttenuation { get; set; }
+
+        public static EaxGlobalDiffractionModel Parse(BinaryReader reader)
         {
-            MaxAttenuation = reader.ReadInt32(),
-            LfRatio = reader.ReadSingle(),
-            AngleMaxAttenuation = reader.ReadInt32(),
-        };
+            return new EaxGlobalDiffractionModel
+            {
+                MaxAttenuation = reader.ReadInt32(),
+                LfRatio = reader.ReadSingle(),
+                AngleMaxAttenuation = reader.ReadInt32(),
+            };
+        }
     }
 }

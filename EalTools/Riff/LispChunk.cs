@@ -1,22 +1,25 @@
+using System.Collections.Generic;
+
 using EalTools.Eal;
 
-namespace EalTools.Riff;
-
-public class LispChunk : Chunk
+namespace EalTools.Riff
 {
-    public List<EaxListenerProperties> ListenerProperties { get; set; } = new List<EaxListenerProperties>();
-
-    public LispChunk()
+    public class LispChunk : Chunk
     {
-        ChunkId = FourCC.Lisp;
-    }
+        public List<EaxListenerProperties> ListenerProperties { get; set; } = new List<EaxListenerProperties>();
 
-    public override void Initialize(byte[] data)
-    {
-        base.Initialize(data);
-        while (_reader.BaseStream.Position < _reader.BaseStream.Length)
+        public LispChunk()
         {
-            ListenerProperties.Add(EaxListenerProperties.Parse(_reader));
+            ChunkId = FourCC.Lisp;
+        }
+
+        public override void Initialize(byte[] data)
+        {
+            base.Initialize(data);
+            while (_reader.BaseStream.Position < _reader.BaseStream.Length)
+            {
+                ListenerProperties.Add(EaxListenerProperties.Parse(_reader));
+            }
         }
     }
 }

@@ -1,17 +1,18 @@
-namespace EalTools.Riff;
-
-public class DfilChunk : Chunk
+namespace EalTools.Riff
 {
-    public string Filepath { get; set; }
-
-    public DfilChunk()
+    public class DfilChunk : Chunk
     {
-        ChunkId = FourCC.Dfil;
-    }
+        public string Filepath { get; set; }
 
-    public override void Initialize(byte[] data)
-    {
-        base.Initialize(data);
-        Filepath = _reader.ReadSzString(260);
+        public DfilChunk()
+        {
+            ChunkId = FourCC.Dfil;
+        }
+
+        public override void Initialize(byte[] data)
+        {
+            base.Initialize(data);
+            Filepath = _reader.ReadSzString(260);
+        }
     }
 }

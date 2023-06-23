@@ -1,15 +1,18 @@
-namespace EalTools.Riff;
+using System.IO;
 
-public abstract class Chunk : IChunk
+namespace EalTools.Riff
 {
-    public FourCC ChunkId { get; set; }
-    public int ChunkSize { get; set; }
-
-    protected BinaryReader _reader;
-
-    public virtual void Initialize(byte[] data)
+    public abstract class Chunk : IChunk
     {
-        ChunkSize = data.Length;
-        _reader = new BinaryReader(new MemoryStream(data));
+        public FourCC ChunkId { get; set; }
+        public int ChunkSize { get; set; }
+
+        protected BinaryReader _reader;
+
+        public virtual void Initialize(byte[] data)
+        {
+            ChunkSize = data.Length;
+            _reader = new BinaryReader(new MemoryStream(data));
+        }
     }
 }

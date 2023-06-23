@@ -1,17 +1,18 @@
-namespace EalTools.Riff;
-
-public class MajvChunk : Chunk
+namespace EalTools.Riff
 {
-    public int MajorVersion { get; set; }
-
-    public MajvChunk()
+    public class MajvChunk : Chunk
     {
-        ChunkId = FourCC.Majv;
-    }
+        public int MajorVersion { get; set; }
 
-    public override void Initialize(byte[] data)
-    {
-        base.Initialize(data);
-        MajorVersion = _reader.ReadInt32();
+        public MajvChunk()
+        {
+            ChunkId = FourCC.Majv;
+        }
+
+        public override void Initialize(byte[] data)
+        {
+            base.Initialize(data);
+            MajorVersion = _reader.ReadInt32();
+        }
     }
 }

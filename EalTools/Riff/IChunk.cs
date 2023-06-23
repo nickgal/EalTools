@@ -1,8 +1,9 @@
-namespace EalTools.Riff;
-
-public interface IChunk
+namespace EalTools.Riff
 {
-    public FourCC ChunkId { get; set; }
-    public int ChunkSize { get; set; }
-    public void Initialize(byte[] data);
+    public interface IChunk
+    {
+        public FourCC ChunkId { get; set; }
+        public int ChunkSize { get; set; }
+        public void Initialize(byte[] data);
+    }
 }

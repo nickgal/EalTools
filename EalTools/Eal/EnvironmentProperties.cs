@@ -1,7 +1,8 @@
-namespace EalTools.Eal;
-
-public class EnvironmentProperties
+namespace EalTools.Eal
 {
-    public string Name { get; set; }
-    public EaxListenerProperties ListenerProperties { get; set; }
+    public class EnvironmentProperties
+    {
+        public string Name { get; set; }
+        public EaxListenerProperties ListenerProperties { get; set; }
+    }
 }

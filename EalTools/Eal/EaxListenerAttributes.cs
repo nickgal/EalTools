@@ -1,18 +1,21 @@
-namespace EalTools.Eal;
+using System.IO;
 
-public class EaxListenerAttributes
+namespace EalTools.Eal
 {
-    public float DistanceFactor { get; set; }
-    public float RolloffFactor { get; set; }
-    public float DopplerFactor { get; set; }
-
-    public static EaxListenerAttributes Parse(BinaryReader reader)
+    public class EaxListenerAttributes
     {
-        return new()
+        public float DistanceFactor { get; set; }
+        public float RolloffFactor { get; set; }
+        public float DopplerFactor { get; set; }
+
+        public static EaxListenerAttributes Parse(BinaryReader reader)
         {
-            DistanceFactor = reader.ReadSingle(),
-            RolloffFactor = reader.ReadSingle(),
-            DopplerFactor = reader.ReadSingle(),
-        };
+            return new EaxListenerAttributes
+            {
+                DistanceFactor = reader.ReadSingle(),
+                RolloffFactor = reader.ReadSingle(),
+                DopplerFactor = reader.ReadSingle(),
+            };
+        }
     }
 }

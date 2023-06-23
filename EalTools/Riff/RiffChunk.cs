@@ -1,9 +1,10 @@
-namespace EalTools.Riff;
-
-public class RiffChunk : ListChunk
+namespace EalTools.Riff
 {
-    public RiffChunk()
+    public class RiffChunk : ListChunk
     {
-        ChunkId = FourCC.Riff;
+        public RiffChunk()
+        {
+            ChunkId = FourCC.Riff;
+        }
     }
 }

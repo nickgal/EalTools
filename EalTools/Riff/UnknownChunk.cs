@@ -1,9 +1,10 @@
-namespace EalTools.Riff;
-
-public class UnknownChunk : Chunk
+namespace EalTools.Riff
 {
-    public UnknownChunk()
+    public class UnknownChunk : Chunk
     {
-        ChunkId = FourCC.Unknown;
+        public UnknownChunk()
+        {
+            ChunkId = FourCC.Unknown;
+        }
     }
 }

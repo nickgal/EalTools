@@ -1,20 +1,23 @@
-namespace EalTools.Eal;
+using System.IO;
 
-public class EaxMaterialAttributes
+namespace EalTools.Eal
 {
-    public int Level { get; set; }
-    public float LfRatio { get; set; }
-    public float RoomRatio { get; set; }
-    public EaxMaterialFlags Flags { get; set; }
-
-    public static EaxMaterialAttributes Parse(BinaryReader reader)
+    public class EaxMaterialAttributes
     {
-        return new()
+        public int Level { get; set; }
+        public float LfRatio { get; set; }
+        public float RoomRatio { get; set; }
+        public EaxMaterialFlags Flags { get; set; }
+
+        public static EaxMaterialAttributes Parse(BinaryReader reader)
         {
-            Level = reader.ReadInt32(),
-            LfRatio = reader.ReadSingle(),
-            RoomRatio = reader.ReadSingle(),
-            Flags = (EaxMaterialFlags) reader.ReadInt32(),
-        };
+            return new EaxMaterialAttributes
+            {
+                Level = reader.ReadInt32(),
+                LfRatio = reader.ReadSingle(),
+                RoomRatio = reader.ReadSingle(),
+                Flags = (EaxMaterialFlags)reader.ReadInt32(),
+            };
+        }
     }
 }

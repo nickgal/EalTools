@@ -1,17 +1,18 @@
-namespace EalTools.Riff;
-
-public class NumChunk : Chunk
+namespace EalTools.Riff
 {
-    public int Number { get; set; }
-
-    public NumChunk()
+    public class NumChunk : Chunk
     {
-        ChunkId = FourCC.Num;
-    }
+        public int Number { get; set; }
 
-    public override void Initialize(byte[] data)
-    {
-        base.Initialize(data);
-        Number = _reader.ReadInt32();
+        public NumChunk()
+        {
+            ChunkId = FourCC.Num;
+        }
+
+        public override void Initialize(byte[] data)
+        {
+            base.Initialize(data);
+            Number = _reader.ReadInt32();
+        }
     }
 }

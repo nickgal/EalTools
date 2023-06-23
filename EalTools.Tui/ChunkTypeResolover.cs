@@ -1,25 +1,27 @@
+using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Text.Json.Serialization.Metadata;
 
 using EalTools.Riff;
 
-namespace EalTools.Tui;
-public class ChunkTypeResolver : DefaultJsonTypeInfoResolver
+namespace EalTools.Tui
 {
-    public override JsonTypeInfo GetTypeInfo(Type type, JsonSerializerOptions options)
+    public class ChunkTypeResolver : DefaultJsonTypeInfoResolver
     {
-        JsonTypeInfo jsonTypeInfo = base.GetTypeInfo(type, options);
-
-        Type chunkType = typeof(IChunk);
-        if (jsonTypeInfo.Type == chunkType)
+        public override JsonTypeInfo GetTypeInfo(Type type, JsonSerializerOptions options)
         {
-            jsonTypeInfo.PolymorphismOptions = new JsonPolymorphismOptions
+            JsonTypeInfo jsonTypeInfo = base.GetTypeInfo(type, options);
+
+            Type chunkType = typeof(IChunk);
+            if (jsonTypeInfo.Type == chunkType)
             {
-                TypeDiscriminatorPropertyName = "$chunk-type",
-                IgnoreUnrecognizedTypeDiscriminators = true,
-                UnknownDerivedTypeHandling = JsonUnknownDerivedTypeHandling.FailSerialization,
-                DerivedTypes =
+                jsonTypeInfo.PolymorphismOptions = new JsonPolymorphismOptions
+                {
+                    TypeDiscriminatorPropertyName = "$chunk-type",
+                    IgnoreUnrecognizedTypeDiscriminators = true,
+                    UnknownDerivedTypeHandling = JsonUnknownDerivedTypeHandling.FailSerialization,
+                    DerivedTypes =
                 {
                     // new JsonDerivedType(typeof(Chunk)),
                     new JsonDerivedType(typeof(CmdsChunk)),
@@ -43,9 +45,10 @@ public class ChunkTypeResolver : DefaultJsonTypeInfoResolver
                     new JsonDerivedType(typeof(SrcaChunk)),
                     new JsonDerivedType(typeof(UnknownChunk)),
                 }
-            };
-        }
+                };
+            }
 
-        return jsonTypeInfo;
+            return jsonTypeInfo;
+        }
     }
 }

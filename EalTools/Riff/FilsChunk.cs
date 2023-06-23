@@ -1,20 +1,23 @@
-namespace EalTools.Riff;
+using System.Collections.Generic;
 
-public class FilsChunk : Chunk
+namespace EalTools.Riff
 {
-    public List<string> Filepaths { get; set; } = new List<string>();
-
-    public FilsChunk()
+    public class FilsChunk : Chunk
     {
-        ChunkId = FourCC.Fils;
-    }
+        public List<string> Filepaths { get; set; } = new List<string>();
 
-    public override void Initialize(byte[] data)
-    {
-        base.Initialize(data);
-        while (_reader.BaseStream.Position < _reader.BaseStream.Length)
+        public FilsChunk()
         {
-            Filepaths.Add(_reader.ReadSzString(260));
+            ChunkId = FourCC.Fils;
+        }
+
+        public override void Initialize(byte[] data)
+        {
+            base.Initialize(data);
+            while (_reader.BaseStream.Position < _reader.BaseStream.Length)
+            {
+                Filepaths.Add(_reader.ReadSzString(260));
+            }
         }
     }
 }

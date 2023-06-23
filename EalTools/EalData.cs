@@ -1,149 +1,153 @@
+using System;
+using System.Collections.Generic;
+
 using EalTools.Eal;
 using EalTools.Riff;
 
-namespace EalTools;
-
-public class EalData
+namespace EalTools
 {
-    public string Version { get; private set; } = "Unknown";
-    // TODO: exep
-    // TODO: cmds
-    public EaxGlobalDiffractionModel? GlobalDiffractionModel { get; set; }
-    public EaxListenerAttributes? ListenerAttributes { get; set; }
-    public EaxListenerProperties? DefaultEnvironment { get; set; }
-    public EaxMaterialAttributes? DefaultObstacle { get; set; }
-    public EaxSourceAttributes? DefaultSource { get; set; }
-    public List<EnvironmentProperties> EnvironmentModels { get; set; } = new List<EnvironmentProperties>();
-    public List<GeometryProperties> GeometrySets { get; set; } = new List<GeometryProperties>();
-    public List<MaterialProperties> ObstacleModels { get; set; } = new List<MaterialProperties>();
-    public List<SourceProperties> SourceModels { get; set; } = new List<SourceProperties>();
-
-    private readonly RiffChunk _riffChunk;
-
-    public EalData(RiffChunk riffChunk)
+    public class EalData
     {
-        _riffChunk = riffChunk ?? throw new ArgumentNullException(nameof(riffChunk));
+        public string Version { get; private set; } = "Unknown";
+        // TODO: exep
+        // TODO: cmds
+        public EaxGlobalDiffractionModel? GlobalDiffractionModel { get; set; }
+        public EaxListenerAttributes? ListenerAttributes { get; set; }
+        public EaxListenerProperties? DefaultEnvironment { get; set; }
+        public EaxMaterialAttributes? DefaultObstacle { get; set; }
+        public EaxSourceAttributes? DefaultSource { get; set; }
+        public List<EnvironmentProperties> EnvironmentModels { get; set; } = new List<EnvironmentProperties>();
+        public List<GeometryProperties> GeometrySets { get; set; } = new List<GeometryProperties>();
+        public List<MaterialProperties> ObstacleModels { get; set; } = new List<MaterialProperties>();
+        public List<SourceProperties> SourceModels { get; set; } = new List<SourceProperties>();
 
-        SetVersion();
-        SetGlobalDiffractionModel();
-        SetListenerAttributes();
-        SetDefaultEnvironment();
-        SetDefaultObstacle();
-        SetDefaultSource();
-        SetEnvironmentModels();
-        SetGeometrySets();
-        SetObstacleModels();
-        SetSourceModels();
-    }
+        private readonly RiffChunk _riffChunk;
 
-    private void SetVersion()
-    {
-        var majorVersion = _riffChunk.FindSubChunk<MajvChunk>()?.MajorVersion;
-        var minorVersion = _riffChunk.FindSubChunk<MinvChunk>()?.MinorVersion;
-        if (majorVersion != null && minorVersion != null)
+        public EalData(RiffChunk riffChunk)
         {
-            Version = $"{majorVersion}.{minorVersion}";
+            _riffChunk = riffChunk ?? throw new ArgumentNullException(nameof(riffChunk));
+
+            SetVersion();
+            SetGlobalDiffractionModel();
+            SetListenerAttributes();
+            SetDefaultEnvironment();
+            SetDefaultObstacle();
+            SetDefaultSource();
+            SetEnvironmentModels();
+            SetGeometrySets();
+            SetObstacleModels();
+            SetSourceModels();
         }
-    }
 
-    private void SetGlobalDiffractionModel()
-    {
-        GlobalDiffractionModel = _riffChunk.FindSubChunk<GdfmChunk>()?.DiffractionModel;
-    }
-
-    private void SetListenerAttributes()
-    {
-        ListenerAttributes = _riffChunk.FindSubChunk<LisaChunk>()?.ListenerAttributes;
-    }
-
-    private void SetDefaultEnvironment()
-    {
-        DefaultEnvironment = _riffChunk.FindSubChunk<DenvChunk>()?.ListenerProperties;
-    }
-
-    private void SetDefaultObstacle()
-    {
-        DefaultObstacle = _riffChunk.FindSubChunk<DmatChunk>()?.MaterialAttributes;
-    }
-
-    private void SetDefaultSource()
-    {
-        DefaultSource = _riffChunk.FindSubChunk<DsrcChunk>()?.SourceAttributes;
-    }
-
-    private void SetEnvironmentModels()
-    {
-        if (!_riffChunk.TryFindListOfForm(FourCC.Envp, out var listChunk)) return;
-
-        if (!listChunk.TryFindSubChunk<NumChunk>(out var numChunk)) return;
-        if (!listChunk.TryFindSubChunk<NamsChunk>(out var namsChunk)) return;
-        if (!listChunk.TryFindSubChunk<LispChunk>(out var lispChunk)) return;
-
-        for (int i = 0; i < numChunk.Number; i++)
+        private void SetVersion()
         {
-            EnvironmentModels.Add(new EnvironmentProperties()
+            var majorVersion = _riffChunk.FindSubChunk<MajvChunk>()?.MajorVersion;
+            var minorVersion = _riffChunk.FindSubChunk<MinvChunk>()?.MinorVersion;
+            if (majorVersion != null && minorVersion != null)
             {
-                Name = namsChunk.Names[i],
-                ListenerProperties = lispChunk.ListenerProperties[i],
-            });
+                Version = $"{majorVersion}.{minorVersion}";
+            }
         }
-    }
 
-    private void SetGeometrySets()
-    {
-        if (!_riffChunk.TryFindListOfForm(FourCC.Gemp, out var listChunk)) return;
-
-        if (!listChunk.TryFindSubChunk<NumChunk>(out var numChunk)) return;
-        if (!listChunk.TryFindSubChunk<NamsChunk>(out var namsChunk)) return;
-        if (!listChunk.TryFindSubChunk<FilsChunk>(out var filsChunk)) return;
-        if (!listChunk.TryFindSubChunk<GemaChunk>(out var gemaChunk)) return;
-
-        for (int i = 0; i < numChunk.Number; i++)
+        private void SetGlobalDiffractionModel()
         {
-            GeometrySets.Add(new GeometryProperties()
-            {
-                Name = namsChunk.Names[i],
-                Filepath = filsChunk.Filepaths[i],
-                GeometryAttributes = new EalGeometryAttributes() // gemaChunk.GeometryAttributes[i], // FIXME:
-            });
+            GlobalDiffractionModel = _riffChunk.FindSubChunk<GdfmChunk>()?.DiffractionModel;
         }
-    }
 
-    private void SetObstacleModels()
-    {
-        if (!_riffChunk.TryFindListOfForm(FourCC.Matp, out var listChunk)) return;
-
-        if (!listChunk.TryFindSubChunk<NumChunk>(out var numChunk)) return;
-        if (!listChunk.TryFindSubChunk<NamsChunk>(out var namsChunk)) return;
-        if (!listChunk.TryFindSubChunk<MataChunk>(out var mataChunk)) return;
-
-        for (int i = 0; i < numChunk.Number; i++)
+        private void SetListenerAttributes()
         {
-            ObstacleModels.Add(new MaterialProperties()
-            {
-                Name = namsChunk.Names[i],
-                MaterialAttributes = mataChunk.MaterialAttributes[i],
-            });
+            ListenerAttributes = _riffChunk.FindSubChunk<LisaChunk>()?.ListenerAttributes;
         }
-    }
 
-    private void SetSourceModels()
-    {
-        if (!_riffChunk.TryFindListOfForm(FourCC.Srcp, out var listChunk)) return;
-
-        if (!listChunk.TryFindSubChunk<NumChunk>(out var numChunk)) return;
-        if (!listChunk.TryFindSubChunk<NamsChunk>(out var namsChunk)) return;
-        if (!listChunk.TryFindSubChunk<FilsChunk>(out var filsChunk)) return;
-        if (!listChunk.TryFindSubChunk<SrcaChunk>(out var srcaChunk)) return;
-
-        for (int i = 0; i < numChunk.Number; i++)
+        private void SetDefaultEnvironment()
         {
-            SourceModels.Add(new SourceProperties()
+            DefaultEnvironment = _riffChunk.FindSubChunk<DenvChunk>()?.ListenerProperties;
+        }
+
+        private void SetDefaultObstacle()
+        {
+            DefaultObstacle = _riffChunk.FindSubChunk<DmatChunk>()?.MaterialAttributes;
+        }
+
+        private void SetDefaultSource()
+        {
+            DefaultSource = _riffChunk.FindSubChunk<DsrcChunk>()?.SourceAttributes;
+        }
+
+        private void SetEnvironmentModels()
+        {
+            if (!_riffChunk.TryFindListOfForm(FourCC.Envp, out var listChunk)) return;
+
+            if (!listChunk.TryFindSubChunk<NumChunk>(out var numChunk)) return;
+            if (!listChunk.TryFindSubChunk<NamsChunk>(out var namsChunk)) return;
+            if (!listChunk.TryFindSubChunk<LispChunk>(out var lispChunk)) return;
+
+            for (int i = 0; i < numChunk.Number; i++)
             {
-                Name = namsChunk.Names[i],
-                Filepath = filsChunk.Filepaths[i],
-                SourceAttributes = srcaChunk.SourceAttributes[i],
-            });
+                EnvironmentModels.Add(new EnvironmentProperties()
+                {
+                    Name = namsChunk.Names[i],
+                    ListenerProperties = lispChunk.ListenerProperties[i],
+                });
+            }
+        }
+
+        private void SetGeometrySets()
+        {
+            if (!_riffChunk.TryFindListOfForm(FourCC.Gemp, out var listChunk)) return;
+
+            if (!listChunk.TryFindSubChunk<NumChunk>(out var numChunk)) return;
+            if (!listChunk.TryFindSubChunk<NamsChunk>(out var namsChunk)) return;
+            if (!listChunk.TryFindSubChunk<FilsChunk>(out var filsChunk)) return;
+            if (!listChunk.TryFindSubChunk<GemaChunk>(out var gemaChunk)) return;
+
+            for (int i = 0; i < numChunk.Number; i++)
+            {
+                GeometrySets.Add(new GeometryProperties()
+                {
+                    Name = namsChunk.Names[i],
+                    Filepath = filsChunk.Filepaths[i],
+                    GeometryAttributes = new EalGeometryAttributes() // gemaChunk.GeometryAttributes[i], // FIXME:
+                });
+            }
+        }
+
+        private void SetObstacleModels()
+        {
+            if (!_riffChunk.TryFindListOfForm(FourCC.Matp, out var listChunk)) return;
+
+            if (!listChunk.TryFindSubChunk<NumChunk>(out var numChunk)) return;
+            if (!listChunk.TryFindSubChunk<NamsChunk>(out var namsChunk)) return;
+            if (!listChunk.TryFindSubChunk<MataChunk>(out var mataChunk)) return;
+
+            for (int i = 0; i < numChunk.Number; i++)
+            {
+                ObstacleModels.Add(new MaterialProperties()
+                {
+                    Name = namsChunk.Names[i],
+                    MaterialAttributes = mataChunk.MaterialAttributes[i],
+                });
+            }
+        }
+
+        private void SetSourceModels()
+        {
+            if (!_riffChunk.TryFindListOfForm(FourCC.Srcp, out var listChunk)) return;
+
+            if (!listChunk.TryFindSubChunk<NumChunk>(out var numChunk)) return;
+            if (!listChunk.TryFindSubChunk<NamsChunk>(out var namsChunk)) return;
+            if (!listChunk.TryFindSubChunk<FilsChunk>(out var filsChunk)) return;
+            if (!listChunk.TryFindSubChunk<SrcaChunk>(out var srcaChunk)) return;
+
+            for (int i = 0; i < numChunk.Number; i++)
+            {
+                SourceModels.Add(new SourceProperties()
+                {
+                    Name = namsChunk.Names[i],
+                    Filepath = filsChunk.Filepaths[i],
+                    SourceAttributes = srcaChunk.SourceAttributes[i],
+                });
+            }
         }
     }
 }

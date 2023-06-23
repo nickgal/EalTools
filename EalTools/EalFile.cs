@@ -1,37 +1,39 @@
-using EalTools.Eal;
+using System.IO;
+
 using EalTools.Riff;
 
-namespace EalTools;
-
-public class EalFile
+namespace EalTools
 {
-    public EalData? Data { get; set; }
-    public RiffChunk RootChunk = new();
-
-    private readonly BinaryReader _reader;
-
-    public EalFile(string filePath)
+    public class EalFile
     {
-        var stream = File.Open(filePath, FileMode.Open);
-        _reader = new BinaryReader(stream);
-    }
+        public EalData? Data { get; set; }
+        public RiffChunk RootChunk = new RiffChunk();
 
-    public EalFile(Stream stream)
-    {
-        _reader = new BinaryReader(stream);
-    }
+        private readonly BinaryReader _reader;
 
-    public bool Initialize()
-    {
-        var chunk = ChunkFactory.GetChunk(_reader);
-        if (chunk is not RiffChunk riffChunk || riffChunk.FormType != FourCC.Eal)
+        public EalFile(string filePath)
         {
-            return false;
+            var stream = File.Open(filePath, FileMode.Open);
+            _reader = new BinaryReader(stream);
         }
 
-        RootChunk = riffChunk;
-        Data = new EalData(riffChunk);
+        public EalFile(Stream stream)
+        {
+            _reader = new BinaryReader(stream);
+        }
 
-        return true;
+        public bool Initialize()
+        {
+            var chunk = ChunkFactory.GetChunk(_reader);
+            if (!(chunk is RiffChunk riffChunk && riffChunk.FormType == FourCC.Eal))
+            {
+                return false;
+            }
+
+            RootChunk = riffChunk;
+            Data = new EalData(riffChunk);
+
+            return true;
+        }
     }
 }

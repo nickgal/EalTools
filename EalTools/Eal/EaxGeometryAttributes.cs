@@ -1,10 +1,13 @@
-namespace EalTools.Eal;
+using System.IO;
 
-public class EalGeometryAttributes
+namespace EalTools.Eal
 {
-    public static EalGeometryAttributes Parse(BinaryReader reader)
+    public class EalGeometryAttributes
     {
-        // TODO: Parse contents
-        return new EalGeometryAttributes();
+        public static EalGeometryAttributes Parse(BinaryReader reader)
+        {
+            // TODO: Parse contents
+            return new EalGeometryAttributes();
+        }
     }
 }

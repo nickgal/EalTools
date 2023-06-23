@@ -1,25 +1,30 @@
-namespace EalTools.Tests;
+using System.IO;
 
-public static class FixtureFileLoader
+using NUnit.Framework;
+
+namespace EalTools.Tests
 {
-    public static string GetFilePath(string fixtureDir, string fileName)
+    public static class FixtureFileLoader
     {
-        var runningDir = TestContext.CurrentContext.TestDirectory;
-        var projectDir = Directory.GetParent(runningDir).Parent.Parent.FullName;
-        var filePath = Path.Join(projectDir, fixtureDir, fileName);
+        public static string GetFilePath(string fixtureDir, string fileName)
+        {
+            var runningDir = TestContext.CurrentContext.TestDirectory;
+            var projectDir = Directory.GetParent(runningDir).Parent.Parent.FullName;
+            var filePath = Path.Join(projectDir, fixtureDir, fileName);
 
-        return filePath;
-    }
+            return filePath;
+        }
 
-    public static byte[] LoadFileToBytes(string fixtureDir, string fileName)
-    {
-        var filePath = GetFilePath(fixtureDir, fileName);
-        return File.ReadAllBytes(filePath);
-    }
+        public static byte[] LoadFileToBytes(string fixtureDir, string fileName)
+        {
+            var filePath = GetFilePath(fixtureDir, fileName);
+            return File.ReadAllBytes(filePath);
+        }
 
-    public static Stream LoadFileToStream(string fixtureDir, string fileName)
-    {
-        var filePath = GetFilePath(fixtureDir, fileName);
-        return File.OpenRead(filePath);
+        public static Stream LoadFileToStream(string fixtureDir, string fileName)
+        {
+            var filePath = GetFilePath(fixtureDir, fileName);
+            return File.OpenRead(filePath);
+        }
     }
 }

@@ -1,21 +1,23 @@
 using EalTools.Eal;
 
-namespace EalTools.Riff;
-/// <summary>
-/// Listener Attributes
-/// </summary>
-public class LisaChunk : Chunk
+namespace EalTools.Riff
 {
-    public EaxListenerAttributes ListenerAttributes { get; set; }
-
-    public LisaChunk()
+    /// <summary>
+    /// Listener Attributes
+    /// </summary>
+    public class LisaChunk : Chunk
     {
-        ChunkId = FourCC.Lisa;
-    }
+        public EaxListenerAttributes ListenerAttributes { get; set; }
 
-    public override void Initialize(byte[] data)
-    {
-        base.Initialize(data);
-        ListenerAttributes = EaxListenerAttributes.Parse(_reader);
+        public LisaChunk()
+        {
+            ChunkId = FourCC.Lisa;
+        }
+
+        public override void Initialize(byte[] data)
+        {
+            base.Initialize(data);
+            ListenerAttributes = EaxListenerAttributes.Parse(_reader);
+        }
     }
 }

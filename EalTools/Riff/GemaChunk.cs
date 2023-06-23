@@ -1,22 +1,25 @@
+using System.Collections.Generic;
+
 using EalTools.Eal;
 
-namespace EalTools.Riff;
-
-public class GemaChunk : Chunk
+namespace EalTools.Riff
 {
-    public List<EalGeometryAttributes> GeometryAttributes { get; set; } = new List<EalGeometryAttributes>();
-    public GemaChunk()
+    public class GemaChunk : Chunk
     {
-        ChunkId = FourCC.Gema;
-    }
+        public List<EalGeometryAttributes> GeometryAttributes { get; set; } = new List<EalGeometryAttributes>();
+        public GemaChunk()
+        {
+            ChunkId = FourCC.Gema;
+        }
 
-    public override void Initialize(byte[] data)
-    {
-        base.Initialize(data);
-        // TODO:
-        // while (_reader.BaseStream.Position < _reader.BaseStream.Length)
-        // {
-        //     GeometryAttributes.Add(EalGeometryAttributes.Parse(_reader));
-        // }
+        public override void Initialize(byte[] data)
+        {
+            base.Initialize(data);
+            // TODO:
+            // while (_reader.BaseStream.Position < _reader.BaseStream.Length)
+            // {
+            //     GeometryAttributes.Add(EalGeometryAttributes.Parse(_reader));
+            // }
+        }
     }
 }

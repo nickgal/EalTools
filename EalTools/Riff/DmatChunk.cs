@@ -1,21 +1,23 @@
 using EalTools.Eal;
 
-namespace EalTools.Riff;
-/// <summary>
-/// Default Obstacle
-/// </summary>
-public class DmatChunk : Chunk
+namespace EalTools.Riff
 {
-    public EaxMaterialAttributes MaterialAttributes { get; set; }
-
-    public DmatChunk()
+    /// <summary>
+    /// Default Obstacle
+    /// </summary>
+    public class DmatChunk : Chunk
     {
-        ChunkId = FourCC.Dmat;
-    }
+        public EaxMaterialAttributes MaterialAttributes { get; set; }
 
-    public override void Initialize(byte[] data)
-    {
-        base.Initialize(data);
-        MaterialAttributes = EaxMaterialAttributes.Parse(_reader);
+        public DmatChunk()
+        {
+            ChunkId = FourCC.Dmat;
+        }
+
+        public override void Initialize(byte[] data)
+        {
+            base.Initialize(data);
+            MaterialAttributes = EaxMaterialAttributes.Parse(_reader);
+        }
     }
 }

@@ -1,17 +1,18 @@
-namespace EalTools.Riff;
-
-public class MinvChunk : Chunk
+namespace EalTools.Riff
 {
-    public int MinorVersion { get; set; }
-
-    public MinvChunk()
+    public class MinvChunk : Chunk
     {
-        ChunkId = FourCC.Minv;
-    }
+        public int MinorVersion { get; set; }
 
-    public override void Initialize(byte[] data)
-    {
-        base.Initialize(data);
-        MinorVersion = _reader.ReadInt32();
+        public MinvChunk()
+        {
+            ChunkId = FourCC.Minv;
+        }
+
+        public override void Initialize(byte[] data)
+        {
+            base.Initialize(data);
+            MinorVersion = _reader.ReadInt32();
+        }
     }
 }

@@ -1,21 +1,23 @@
 using EalTools.Eal;
 
-namespace EalTools.Riff;
-/// <summary>
-/// Global Defraction Model
-/// </summary>
-public class GdfmChunk : Chunk
+namespace EalTools.Riff
 {
-    public EaxGlobalDiffractionModel DiffractionModel { get; set; }
-
-    public GdfmChunk()
+    /// <summary>
+    /// Global Defraction Model
+    /// </summary>
+    public class GdfmChunk : Chunk
     {
-        ChunkId = FourCC.Gdfm;
-    }
+        public EaxGlobalDiffractionModel DiffractionModel { get; set; }
 
-    public override void Initialize(byte[] data)
-    {
-        base.Initialize(data);
-        DiffractionModel = EaxGlobalDiffractionModel.Parse(_reader);
+        public GdfmChunk()
+        {
+            ChunkId = FourCC.Gdfm;
+        }
+
+        public override void Initialize(byte[] data)
+        {
+            base.Initialize(data);
+            DiffractionModel = EaxGlobalDiffractionModel.Parse(_reader);
+        }
     }
 }

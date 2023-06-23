@@ -1,25 +1,28 @@
+using System.IO;
+using System.Linq;
 using System.Text;
 
-namespace EalTools;
-
-public static class BinaryReaderExtensions
+namespace EalTools
 {
-    public static string ReadSzString(this BinaryReader reader)
+    public static class BinaryReaderExtensions
     {
-        var result = new StringBuilder();
-        char chr;
-
-        while ((chr = reader.ReadChar()) != '\0')
+        public static string ReadSzString(this BinaryReader reader)
         {
-            result.Append(chr);
+            var result = new StringBuilder();
+            char chr;
+
+            while ((chr = reader.ReadChar()) != '\0')
+            {
+                result.Append(chr);
+            }
+
+            return result.ToString();
         }
 
-        return result.ToString();
-    }
-
-    public static string ReadSzString(this BinaryReader reader, int count)
-    {
-        var bytes = reader.ReadBytes(count);
-        return Encoding.ASCII.GetString(bytes.TakeWhile(b => b != 0).ToArray());
+        public static string ReadSzString(this BinaryReader reader, int count)
+        {
+            var bytes = reader.ReadBytes(count);
+            return Encoding.ASCII.GetString(bytes.TakeWhile(b => b != 0).ToArray());
+        }
     }
 }

@@ -1,22 +1,25 @@
+using System.Collections.Generic;
+
 using EalTools.Eal;
 
-namespace EalTools.Riff;
-
-public class SrcaChunk : Chunk
+namespace EalTools.Riff
 {
-    public List<EaxSourceAttributes> SourceAttributes { get; set; } = new List<EaxSourceAttributes>();
-
-    public SrcaChunk()
+    public class SrcaChunk : Chunk
     {
-        ChunkId = FourCC.Srca;
-    }
+        public List<EaxSourceAttributes> SourceAttributes { get; set; } = new List<EaxSourceAttributes>();
 
-    public override void Initialize(byte[] data)
-    {
-        base.Initialize(data);
-        while (_reader.BaseStream.Position < _reader.BaseStream.Length)
+        public SrcaChunk()
         {
-            SourceAttributes.Add(EaxSourceAttributes.Parse(_reader));
+            ChunkId = FourCC.Srca;
+        }
+
+        public override void Initialize(byte[] data)
+        {
+            base.Initialize(data);
+            while (_reader.BaseStream.Position < _reader.BaseStream.Length)
+            {
+                SourceAttributes.Add(EaxSourceAttributes.Parse(_reader));
+            }
         }
     }
 }

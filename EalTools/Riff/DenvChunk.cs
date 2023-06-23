@@ -1,21 +1,23 @@
 using EalTools.Eal;
 
-namespace EalTools.Riff;
-/// <summary>
-/// DefaultEnvironment
-/// </summary>
-public class DenvChunk : Chunk
+namespace EalTools.Riff
 {
-    public EaxListenerProperties ListenerProperties { get; set; }
-
-    public DenvChunk()
+    /// <summary>
+    /// DefaultEnvironment
+    /// </summary>
+    public class DenvChunk : Chunk
     {
-        ChunkId = FourCC.Denv;
-    }
+        public EaxListenerProperties ListenerProperties { get; set; }
 
-    public override void Initialize(byte[] data)
-    {
-        base.Initialize(data);
-        ListenerProperties = EaxListenerProperties.Parse(_reader);
+        public DenvChunk()
+        {
+            ChunkId = FourCC.Denv;
+        }
+
+        public override void Initialize(byte[] data)
+        {
+            base.Initialize(data);
+            ListenerProperties = EaxListenerProperties.Parse(_reader);
+        }
     }
 }

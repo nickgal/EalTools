@@ -1,22 +1,25 @@
+using System.Collections.Generic;
+
 using EalTools.Eal;
 
-namespace EalTools.Riff;
-
-public class MataChunk : Chunk
+namespace EalTools.Riff
 {
-    public List<EaxMaterialAttributes> MaterialAttributes { get; set; } = new List<EaxMaterialAttributes>();
-
-    public MataChunk()
+    public class MataChunk : Chunk
     {
-        ChunkId = FourCC.Mata;
-    }
+        public List<EaxMaterialAttributes> MaterialAttributes { get; set; } = new List<EaxMaterialAttributes>();
 
-    public override void Initialize(byte[] data)
-    {
-        base.Initialize(data);
-        while (_reader.BaseStream.Position < _reader.BaseStream.Length)
+        public MataChunk()
         {
-            MaterialAttributes.Add(EaxMaterialAttributes.Parse(_reader));
+            ChunkId = FourCC.Mata;
+        }
+
+        public override void Initialize(byte[] data)
+        {
+            base.Initialize(data);
+            while (_reader.BaseStream.Position < _reader.BaseStream.Length)
+            {
+                MaterialAttributes.Add(EaxMaterialAttributes.Parse(_reader));
+            }
         }
     }
 }

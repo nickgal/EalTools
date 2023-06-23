@@ -1,14 +1,22 @@
-﻿using EalTools.Tui;
-using Terminal.Gui;
+﻿using Terminal.Gui;
 
-Application.Init();
+namespace EalTools.Tui
+{
+    class Program
+    {
+        static void Main()
+        {
+            Application.Init();
 
-try
-{
-    EalFileView.Init();
-    Application.Run();
-}
-finally
-{
-    Application.Shutdown();
+            try
+            {
+                EalFileView.Init();
+                Application.Run();
+            }
+            finally
+            {
+                Application.Shutdown();
+            }
+        }
+    }
 }

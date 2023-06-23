@@ -1,21 +1,23 @@
 using EalTools.Eal;
 
-namespace EalTools.Riff;
-/// <summary>
-/// Default Source
-/// </summary>
-public class DsrcChunk : Chunk
+namespace EalTools.Riff
 {
-    public EaxSourceAttributes SourceAttributes { get; set; }
-
-    public DsrcChunk()
+    /// <summary>
+    /// Default Source
+    /// </summary>
+    public class DsrcChunk : Chunk
     {
-        ChunkId = FourCC.Dsrc;
-    }
+        public EaxSourceAttributes SourceAttributes { get; set; }
 
-    public override void Initialize(byte[] data)
-    {
-        base.Initialize(data);
-        SourceAttributes = EaxSourceAttributes.Parse(_reader);
+        public DsrcChunk()
+        {
+            ChunkId = FourCC.Dsrc;
+        }
+
+        public override void Initialize(byte[] data)
+        {
+            base.Initialize(data);
+            SourceAttributes = EaxSourceAttributes.Parse(_reader);
+        }
     }
 }
