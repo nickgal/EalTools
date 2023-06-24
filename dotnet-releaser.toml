@@ -5,5 +5,5 @@ project = "EalTools.sln"
 user = "nickgal"
 repo = "EalTools"
 version_prefix = "v"
-[homebrew]
+[brew]
 publish = false
