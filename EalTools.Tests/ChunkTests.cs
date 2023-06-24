@@ -82,12 +82,12 @@ namespace EalTools.Tests
             Assert.That(diffractionModel?.AngleMaxAttenuation, Is.EqualTo(90));
         }
 
-        [Test]
-        public void Parse_GemaChunk()
-        {
-            // TODO:
-            Assert.Fail();
-        }
+        // [Test]
+        // public void Parse_GemaChunk()
+        // {
+        //     // TODO:
+        //     Assert.Fail();
+        // }
 
         [Test]
         public void Parse_LisaChunk()

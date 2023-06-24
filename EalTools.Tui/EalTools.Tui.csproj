@@ -1,8 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <Description>Eal file TUI</Description>
+    <Copyright>Nick Gal</Copyright>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <PackageTags>eal;parser;tui</PackageTags>
+    <Authors>Nick Gal</Authors>
+    <PackageProjectUrl>https://github.com/nickgal/EalTools</PackageProjectUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <Version>0.1.0</Version>
     <OutputType>Exe</OutputType>
-    <TargetFrameworks>netstandard2.1;net7.0</TargetFrameworks>
+    <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 

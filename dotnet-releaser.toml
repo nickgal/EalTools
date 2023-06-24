@@ -1,0 +1,6 @@
+# configuration file for dotnet-releaser
+[msbuild]
+project = "EalTools.sln"
+[github]
+user = "nickgal"
+repo = "EalTools"
