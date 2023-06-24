@@ -1,5 +1,8 @@
 # EalTools
 
+[![ci](https://github.com/nickgal/EalTools/actions/workflows/ci.yml/badge.svg)](https://github.com/nickgal/EalTools/actions/workflows/ci.yml)
+[![NuGet Badge](https://buildstats.info/nuget/EalTools)](https://www.nuget.org/packages/EalTools/)
+
 <p align="center">
 Parser for Environmental Audio Library (EAL) files<br><br>
 <img src="EalTools.Tests\Fixtures\Eal\eagle-tools-logo.webp" width="200">
