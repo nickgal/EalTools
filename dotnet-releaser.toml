@@ -7,3 +7,5 @@ repo = "EalTools"
 version_prefix = "v"
 [brew]
 publish = false
+[scoop]
+publish = false
