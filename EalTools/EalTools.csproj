@@ -9,7 +9,7 @@
     <PackageProjectUrl>https://github.com/nickgal/EalTools</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
-    <Version>0.1.0</Version>
+    <Version>0.1.1</Version>
     <TargetFrameworks>netstandard2.1;net7.0</TargetFrameworks>
     <Nullable>enable</Nullable>
   </PropertyGroup>
