@@ -4,3 +4,4 @@ project = "EalTools.sln"
 [github]
 user = "nickgal"
 repo = "EalTools"
+version_prefix = "v"
