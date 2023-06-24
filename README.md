@@ -10,8 +10,8 @@
 - [x] List
 - [x] Majv
 - [x] Minv
-- [ ] Exep
-- [ ] Cmds
+- [x] Exep
+- [x] Cmds
 - [x] Gdfm
 - [x] Lisa
 - [x] Denv

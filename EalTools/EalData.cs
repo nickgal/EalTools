@@ -9,8 +9,8 @@ namespace EalTools
     public class EalData
     {
         public string Version { get; private set; } = "Unknown";
-        // TODO: exep
-        // TODO: cmds
+        public string ExecuteProgram { get; private set; }
+        public string ExecuteParameters { get; private set; }
         public EaxGlobalDiffractionModel? GlobalDiffractionModel { get; set; }
         public EaxListenerAttributes? ListenerAttributes { get; set; }
         public EaxListenerProperties? DefaultEnvironment { get; set; }
@@ -28,6 +28,7 @@ namespace EalTools
             _riffChunk = riffChunk ?? throw new ArgumentNullException(nameof(riffChunk));
 
             SetVersion();
+            SetExec();
             SetGlobalDiffractionModel();
             SetListenerAttributes();
             SetDefaultEnvironment();
@@ -47,6 +48,12 @@ namespace EalTools
             {
                 Version = $"{majorVersion}.{minorVersion}";
             }
+        }
+
+        private void SetExec()
+        {
+            ExecuteProgram = _riffChunk.FindSubChunk<ExepChunk>()?.Executable ?? string.Empty;
+            ExecuteParameters = _riffChunk.FindSubChunk<CmdsChunk>()?.Commands ?? string.Empty;
         }
 
         private void SetGlobalDiffractionModel()

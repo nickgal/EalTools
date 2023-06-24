@@ -23,8 +23,8 @@ namespace EalTools.Tests
         [Test]
         public void Parse_CmdsChunk()
         {
-            // TODO:
-            Assert.Fail();
+            var chunk = EalFile.RootChunk.FindSubChunk<CmdsChunk>();
+            Assert.That(chunk?.Commands, Is.EqualTo(string.Empty));
         }
 
         [Test]
@@ -58,8 +58,8 @@ namespace EalTools.Tests
         [Test]
         public void Parse_ExepChunk()
         {
-            // TODO:
-            Assert.Fail();
+            var chunk = EalFile.RootChunk.FindSubChunk<ExepChunk>();
+            Assert.That(chunk?.Executable, Is.EqualTo(string.Empty));
         }
 
         [Test]

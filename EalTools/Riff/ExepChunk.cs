@@ -1,7 +1,12 @@
 namespace EalTools.Riff
 {
+    /// <summary>
+    /// Execute Project
+    /// </summary>
     public class ExepChunk : Chunk
     {
+        public string Executable { get; set; }
+
         public ExepChunk()
         {
             ChunkId = FourCC.Exep;
@@ -10,14 +15,7 @@ namespace EalTools.Riff
         public override void Initialize(byte[] data)
         {
             base.Initialize(data);
-            // TODO: Parse contents
-            //
-            // fixed 260 bytes
-            // starts with 00 0b
-            // then 64 floats
-            // then a6 7a
-            //
-            // Some unreal files have 260 zero bytes
+            Executable = _reader.ReadSzString(260);
         }
     }
 }

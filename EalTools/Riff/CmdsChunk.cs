@@ -1,7 +1,12 @@
 namespace EalTools.Riff
 {
+    /// <summary>
+    /// Commands
+    /// </summary>
     public class CmdsChunk : Chunk
     {
+        public string Commands { get; set; }
+
         public CmdsChunk()
         {
             ChunkId = FourCC.Cmds;
@@ -10,14 +15,7 @@ namespace EalTools.Riff
         public override void Initialize(byte[] data)
         {
             base.Initialize(data);
-            // TODO: Parse contents
-            //
-            // fixed 260 bytes
-            // starts with 00 0b
-            // then 18 floats
-            // then ...?
-            //
-            // Some unreal files have 260 zero bytes
+            Commands = _reader.ReadSzString(260);
         }
     }
 }
