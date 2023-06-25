@@ -40,7 +40,18 @@ namespace EalTools.Riff
                 FourCC.Mata => new MataChunk(),
                 FourCC.Gema => new GemaChunk(),
 
-                _ => new UnknownChunk(),
+                // FourCC.Vind => new VindChunk(),
+                // FourCC.Vert => new VertChunk(),
+                // FourCC.Poly => new PolyChunk(),
+                // FourCC.Plth => new PlthChunk(),
+                // FourCC.Prto => new PrtoChunk(),
+                // FourCC.Clpl => new ClplChunk(),
+                // FourCC.Bspp => new BsppChunk(),
+                // FourCC.Brsh => new BrshChunk(),
+                // FourCC.Tags => new TagsChunk(),
+                // FourCC.Srcs => new SrcsChunk(),
+
+                _ => new UnknownChunk() { ChunkId = chunkType },
             };
         }
     }

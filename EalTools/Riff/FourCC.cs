@@ -9,9 +9,11 @@ namespace EalTools.Riff
         List = 1414744396u,
 
         Eal = 543973733u,
+        Eam = 544039269u,
 
         Majv = 1986683245u,
         Minv = 1986947437u,
+
         Exep = 1885698149u,
         Cmds = 1935961443u,
         Gdfm = 1835426919u,
@@ -34,5 +36,16 @@ namespace EalTools.Riff
         Srca = 1633907315u,
         Mata = 1635017069u,
         Gema = 1634559335u,
+
+        Vind = 1684957558u,
+        Vert = 1953654134u,
+        Poly = 2037149552u,
+        Plth = 1752460400u,
+        Prto = 1869902448u,
+        Clpl = 1819307107u,
+        Bspp = 1886417762u,
+        Brsh = 1752396386u,
+        Tags = 1936154996u,
+        Srcs = 1935897203u,
     }
 }
