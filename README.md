@@ -5,7 +5,7 @@
 
 <p align="center">
 Parser for Environmental Audio Library (EAL) files<br><br>
-<img src="EalTools.Tests\Fixtures\Eal\eagle-tools-logo.webp" width="200">
+<img src="EalTools.Tests\Fixtures\Other\eagle-tools-logo.webp" width="200">
 </p>
 
 ### Chunk Support

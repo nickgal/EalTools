@@ -6,9 +6,8 @@ using EalTools.Riff;
 
 namespace EalTools
 {
-    public class EalData
+    public class EalData : RiffData
     {
-        public string Version { get; private set; } = "Unknown";
         public string ExecuteProgram { get; private set; }
         public string ExecuteParameters { get; private set; }
         public EaxGlobalDiffractionModel? GlobalDiffractionModel { get; set; }
@@ -21,13 +20,8 @@ namespace EalTools
         public List<MaterialProperties> ObstacleModels { get; set; } = new List<MaterialProperties>();
         public List<SourceProperties> SourceModels { get; set; } = new List<SourceProperties>();
 
-        private readonly RiffChunk _riffChunk;
-
-        public EalData(RiffChunk riffChunk)
+        public EalData(RiffChunk riffChunk) : base(riffChunk)
         {
-            _riffChunk = riffChunk ?? throw new ArgumentNullException(nameof(riffChunk));
-
-            SetVersion();
             SetExec();
             SetGlobalDiffractionModel();
             SetListenerAttributes();
@@ -38,16 +32,6 @@ namespace EalTools
             SetGeometrySets();
             SetObstacleModels();
             SetSourceModels();
-        }
-
-        private void SetVersion()
-        {
-            var majorVersion = _riffChunk.FindSubChunk<MajvChunk>()?.MajorVersion;
-            var minorVersion = _riffChunk.FindSubChunk<MinvChunk>()?.MinorVersion;
-            if (majorVersion != null && minorVersion != null)
-            {
-                Version = $"{majorVersion}.{minorVersion}";
-            }
         }
 
         private void SetExec()

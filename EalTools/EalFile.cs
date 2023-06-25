@@ -4,34 +4,26 @@ using EalTools.Riff;
 
 namespace EalTools
 {
-    public class EalFile
+    public class EalFile : RiffFile
     {
-        public EalData? Data { get; set; }
-        public RiffChunk RootChunk = new RiffChunk();
+        protected override FourCC FormType => FourCC.Eal;
 
-        private readonly BinaryReader _reader;
-
-        public EalFile(string filePath)
+        public EalFile(string filePath) : base(filePath)
         {
-            var stream = File.Open(filePath, FileMode.Open);
-            _reader = new BinaryReader(stream);
         }
 
-        public EalFile(Stream stream)
+        public EalFile(Stream stream) : base(stream)
         {
-            _reader = new BinaryReader(stream);
         }
 
-        public bool Initialize()
+        public override bool Initialize()
         {
-            var chunk = ChunkFactory.GetChunk(_reader);
-            if (!(chunk is RiffChunk riffChunk && riffChunk.FormType == FourCC.Eal))
+            if (!base.Initialize())
             {
                 return false;
             }
 
-            RootChunk = riffChunk;
-            Data = new EalData(riffChunk);
+            Data = new EalData(RootChunk);
 
             return true;
         }
