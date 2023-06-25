@@ -58,7 +58,6 @@ namespace EalTools.Tui
                 switch (_chunk)
                 {
                     case RiffChunk riffChunk:
-                    case UnknownChunk unknownChunk:
                         break;
                     default:
                         _stringBuilder.AppendLine(JsonSerializer.Serialize(_chunk, _jsonSerializerOptions));

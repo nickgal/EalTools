@@ -81,13 +81,16 @@ namespace EalTools.Tui
 
         private void LoadEalFile(string filePath)
         {
-            var ealFile = new EalFile(filePath);
-            if (ealFile.Initialize())
+            var fs = File.OpenRead(filePath);
+            var reader = new BinaryReader(fs);
+
+            var riffFile = RiffFileFactory.GetRiffFile(reader);
+            if (riffFile?.Initialize() ?? false)
             {
                 Title = Path.GetFileName(filePath);
                 _detailsFrame.Enabled = true;
                 _treeView.ClearObjects();
-                _treeView.AddObject(ealFile.RootChunk);
+                _treeView.AddObject(riffFile.RootChunk);
                 _treeView.GoToFirst();
                 _treeView.Expand();
             }
@@ -113,7 +116,7 @@ namespace EalTools.Tui
 
         private void Open()
         {
-            var allowedTypes = new List<string>() { ".eal", ".*" };
+            var allowedTypes = new List<string>() { ".eal;.eam", ".*" };
             var dialog = new OpenDialog("Open", "Choose the file to open.", allowedTypes)
             {
                 AllowsMultipleSelection = false
@@ -134,10 +137,6 @@ namespace EalTools.Tui
 
         private void Quit()
         {
-            // if (!CanCloseFile ()) {
-            //     return;
-            // }
-
             Application.RequestStop();
         }
     }
